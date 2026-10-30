@@ -1,0 +1,15 @@
+{
+  "name": "agent-skills-for-power-bi",
+  "description": "Power BI skills for Claude Code",
+  "owner": {
+    "name": "Sean McMahon",
+    "url": "https://github.com/seanmcmahon101"
+  },
+  "plugins": [
+    {
+      "name": "pbi",
+      "source": "./",
+      "description": "Set up a Power BI folder, explain dashboards, build report pages end to end, audit DAX measures, install the Power BI Modeling MCP."
+    }
+  ]
+}
