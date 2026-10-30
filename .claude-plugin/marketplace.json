@@ -1,6 +1,6 @@
 {
-  "name": "agent-skills-for-power-bi",
-  "description": "Power BI skills for Claude Code",
+  "name": "power-bi-autopilot",
+  "description": "Claude Code skills that build, explain and audit Power BI reports for you",
   "owner": {
     "name": "Sean McMahon",
     "url": "https://github.com/seanmcmahon101"

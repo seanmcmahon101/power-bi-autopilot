@@ -1,4 +1,4 @@
-# Agent Skills for Power BI
+# Power BI Autopilot
 
 Claude Code skills that do the Power BI work for you. Point Claude at a folder with a `.pbix` in it and it sets the folder up, explains the report, builds new pages in Power BI Desktop, reviews every DAX measure, and checks its own work on screen.
 
@@ -17,15 +17,15 @@ They are written for people who have never opened a TMDL or PBIR file and don't 
 **As a plugin** (commands are prefixed: `/pbi:viz-it`, `/pbi:data-who`, ...):
 
 ```
-claude plugin marketplace add seanmcmahon101/Agent-Skills-for-Power-BI
-claude plugin install pbi@agent-skills-for-power-bi
+claude plugin marketplace add seanmcmahon101/power-bi-autopilot
+claude plugin install pbi@power-bi-autopilot
 ```
 
 **As personal skills** (plain `/viz-it`, `/data-who`, ...):
 
 ```
-git clone https://github.com/seanmcmahon101/Agent-Skills-for-Power-BI.git
-powershell -ExecutionPolicy Bypass -File Agent-Skills-for-Power-BI\install.ps1
+git clone https://github.com/seanmcmahon101/power-bi-autopilot.git
+powershell -ExecutionPolicy Bypass -File power-bi-autopilot\install.ps1
 ```
 
 Run `install.ps1` again after a `git pull` to update, or with `-Link` to work on the skills in place.

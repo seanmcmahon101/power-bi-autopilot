@@ -6,8 +6,8 @@
     "name": "Sean McMahon",
     "url": "https://github.com/seanmcmahon101"
   },
-  "homepage": "https://github.com/seanmcmahon101/Agent-Skills-for-Power-BI",
-  "repository": "https://github.com/seanmcmahon101/Agent-Skills-for-Power-BI",
+  "homepage": "https://github.com/seanmcmahon101/power-bi-autopilot",
+  "repository": "https://github.com/seanmcmahon101/power-bi-autopilot",
   "license": "MIT",
   "keywords": ["power-bi", "pbip", "pbir", "tmdl", "dax", "dashboards", "semantic-model"]
 }
