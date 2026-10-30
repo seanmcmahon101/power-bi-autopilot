@@ -21,6 +21,10 @@ claude plugin marketplace add seanmcmahon101/power-bi-autopilot
 claude plugin install pbi@power-bi-autopilot
 ```
 
+Inside a session the same works as `/plugin marketplace add seanmcmahon101/power-bi-autopilot`, then `/plugin install pbi@power-bi-autopilot`. Get updates with `claude plugin update pbi@power-bi-autopilot`, or turn on auto-update for the marketplace under **Marketplaces** in `/plugin`.
+
+No SSH key set up for GitHub? Set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` in your environment first, or installs and updates from inside a session fail.
+
 **As personal skills** (plain `/viz-it`, `/data-who`, ...):
 
 ```

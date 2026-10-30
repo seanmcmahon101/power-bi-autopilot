@@ -1,6 +1,5 @@
 {
   "name": "pbi",
-  "version": "0.1.0",
   "description": "Power BI skills for Claude Code that do the work for you: set up a folder, explain a dashboard, build report pages end to end in Power BI Desktop, audit every DAX measure, and install the Power BI Modeling MCP.",
   "author": {
     "name": "Sean McMahon",
