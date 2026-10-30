@@ -37,6 +37,8 @@ Translate jargon the first time it appears:
 | `definition.pbir` with `byConnection` | Thin report: the model lives in the Power BI service. | Report yes; model only via the MCP (`ConnectFabric`). |
 | `.pbi/` folders, `cache.abf` | Desktop's local cache and settings. | Never edit; keep out of git. |
 
+Path length rule: a project's deepest file (a `visual.json`) sits about 87 characters below `<folder>\<name>`, and Windows stops at 260 characters unless long paths are enabled. Desktop then fails to save or open without a clear error. Keep projects in short folders; `scan.js` warns before a conversion, `check.js` errors on long paths.
+
 Folder name rule: every page and visual folder name must equal the `name` inside its JSON. `pages/pages.json` lists the page order. Names are case-sensitive everywhere: `Entity` = exact table name, `Property` = exact column or measure name.
 
 ## Scripts (in this skill's `scripts/` folder; Node 18+ and Windows PowerShell)

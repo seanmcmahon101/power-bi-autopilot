@@ -15,13 +15,14 @@ Dialogs at start-up: a sign-in prompt is the user's account, so ask them to sign
 
 ## Save as .pbip (convert a .pbix)
 
-1. Back up the .pbix to `.pbi-backups/<timestamp>/`.
-2. `desktop.ps1 open -Path "<file>.pbix"`, then focus.
-3. File > Save as. If Desktop shows a backstage page, choose the option to browse this device / a local folder.
-4. In the Windows save dialog: set **Save as type** to *Power BI project files (\*.pbip)*, keep the same folder and name, Save.
-5. If Desktop offers to upgrade the report format or explains the project format, accept the upgrade.
-6. Verify: `node <core>/scripts/scan.js "<folder>"` must now show a project with `report PBIR` and a `TMDL` model. If the report is `PBIR-Legacy` or the model is `model.bim`, do "Turn on PBIR" below.
-7. Tell the user: "Your report is now a Power BI project (`<name>.pbip` plus two folders). Open the .pbip from now on; the .pbix is your untouched old copy."
+1. **Check the folder depth first.** A project nests files ~87 characters below `<folder>\<name>`, and Windows stops at 260 unless long paths are enabled. `scan.js` prints a WARNING on the .pbix when the folder is too deep (common under OneDrive and Temp). Then pick a short folder (e.g. `C:\Users\<you>\pbi\<name>`), create it, and tell the user the project lives there. Saving too deep fails silently: Desktop writes empty folders and the title bar turns to "Untitled".
+2. Back up the .pbix to `.pbi-backups/<timestamp>/`.
+3. `desktop.ps1 open -Path "<file>.pbix"`, then focus.
+4. File > **Save as**. Desktop shows a "Save a copy" page with a Recent list of folders (the file's own folder is usually first) and **Browse this device**. Click the target folder in Recent if it's there, else Browse this device.
+5. In the Windows save dialog: open **Save as type**, pick *Power BI project files (\*.pbip)*, check the folder in the address bar and the file name, then **Save**. To change folder, click the address bar and type the folder path; don't type a full path into File name (autocomplete can swallow it). Never press Escape in this dialog: it closes it.
+6. Wait ~8 seconds. Success = the title bar reads `<name> · Last saved: Today at <time> (Power BI Project)`. If Desktop offers to upgrade the report format, accept.
+7. Verify: `node <core>/scripts/scan.js "<folder>"` must show a project with `report PBIR` and a `TMDL` model (Desktop 2.15x does both by default). If the report is `PBIR-Legacy` or the model is `model.bim`, do "Turn on PBIR" below.
+8. Tell the user: "Your report is now a Power BI project (`<name>.pbip` plus two folders) in `<folder>`. Open the .pbip from now on; the .pbix is your untouched old copy."
 
 ## Turn on PBIR (and TMDL)
 
@@ -34,7 +35,7 @@ These are Desktop preferences for this user, not file changes; mention to the us
 
 ## Reload after writing files
 
-- Desktop has the project open: after the build, wait ~5 seconds and screenshot. A red bar appears under the ribbon: "This project's files were changed externally" with an **Apply external changes** button. Click it. Desktop then asks "Overwrite your unsaved edits": confirm with **Apply external changes** (safe because you saved in Desktop before building). Report-file changes load in place, on the same page.
+- Desktop has the project open: after the build, wait ~5 seconds and screenshot. A red bar appears under the ribbon: "This project's files were changed externally" with an **Apply external changes** button. Click it. If Desktop holds unsaved edits it first asks "Overwrite your unsaved edits": confirm with **Apply external changes** (safe because you saved in Desktop before building). The canvas goes black for a few seconds, then reloads on the same page.
 - No prompt within ~10 seconds, or the model (TMDL) changed: close Desktop (Don't save) and `desktop.ps1 open` the .pbip again.
 - Pages generated with new names break the in-place reload ("ActivePageName not found"); the library keeps names stable, so this only happens with hand-written pages.
 

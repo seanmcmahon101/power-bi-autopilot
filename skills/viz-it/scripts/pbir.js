@@ -400,19 +400,27 @@ function writeTheme(reportDir, ROOT, opts) {
   rep.themeCollection = rep.themeCollection || {};
   const base = rep.themeCollection.baseTheme || {};
   rep.themeCollection.customTheme = { name: themeName, reportVersionAtImport: base.reportVersionAtImport, type: 'RegisteredResources' };
-  rep.resourcePackages = (rep.resourcePackages || []).filter(x => x.name !== 'RegisteredResources');
-  rep.resourcePackages.push({ name: 'RegisteredResources', type: 'RegisteredResources', items: [{ name: themeName, path: themeName, type: 'CustomTheme' }] });
+  // add the theme to the registered resources; keep every other item (images, other themes) the report already has
+  rep.resourcePackages = rep.resourcePackages || [];
+  let reg = rep.resourcePackages.find(x => x.name === 'RegisteredResources');
+  if (!reg) { reg = { name: 'RegisteredResources', type: 'RegisteredResources', items: [] }; rep.resourcePackages.push(reg); }
+  reg.items = (reg.items || []).filter(it => it.name !== themeName && it.type !== 'CustomTheme');
+  reg.items.push({ name: themeName, path: themeName, type: 'CustomTheme' });
   rep.objects = rep.objects || {};
   rep.objects.outspacePane = [{ properties: { expanded: bool(false) } }];
   fs.writeFileSync(reportPath, JSON.stringify(rep, null, 2));
 }
 
-// Writes only the pages this build owns. Other pages stay, except empty ones (Desktop's blank "Page 1")
-// and everything when opts.replaceAll is set.
+// Writes only the pages this build owns: the ones it defines now, plus any it generated last time
+// (listed in generated-pages.json next to the build script), so a page dropped from the build goes too.
+// Other pages stay, except empty ones (Desktop's blank "Page 1") and everything when opts.replaceAll is set.
+// The theme is applied only when it can't restyle the user's own pages: no pages of theirs remain, or the
+// report's custom theme is already this one, or opts.theme === true. Generated visuals set their own colours anyway.
 function writeReport(r, ROOT, PAGES_DIR, opts) {
   fs.mkdirSync(PAGES_DIR, { recursive: true });
-  if (opts.theme !== false) writeTheme(r.dir, ROOT, opts);
-  const mine = new Set(r.pages.map(p => p.name));
+  const manifest = opts.manifest || path.join(path.dirname(process.argv[1] || r.dir), 'generated-pages.json');
+  const before = fs.existsSync(manifest) ? JSON.parse(fs.readFileSync(manifest, 'utf8')) : [];
+  const mine = new Set([...r.pages.map(p => p.name), ...before]);
   const pj = path.join(PAGES_DIR, 'pages.json');
   const meta = fs.existsSync(pj) ? JSON.parse(fs.readFileSync(pj, 'utf8')) : {};
   const kept = [];
@@ -424,6 +432,10 @@ function writeReport(r, ROOT, PAGES_DIR, opts) {
     if (mine.has(d) || opts.replaceAll || empty) fs.rmSync(full, { recursive: true, force: true });
     else kept.push(d);
   }
+  const current = ((JSON.parse(fs.readFileSync(path.join(ROOT, 'report.json'), 'utf8')).themeCollection || {}).customTheme || {}).name;
+  const ours = (opts.themeName || 'Generated').replace(/[^\w-]/g, '') + '.json';
+  const applyTheme = opts.theme === true || (opts.theme !== false && (!kept.length || current === ours));
+  if (applyTheme) writeTheme(r.dir, ROOT, opts);
   const pageBg = { background: [{ properties: { color: hex(PAGE), transparency: num(0) } }], outspace: [{ properties: { color: hex(PAGE), transparency: num(0) } }] };
   for (const p of r.pages) {
     const dir = path.join(PAGES_DIR, p.name);
@@ -442,8 +454,10 @@ function writeReport(r, ROOT, PAGES_DIR, opts) {
   const order = [...r.pages.map(p => p.name), ...oldOrder, ...kept.filter(n => !oldOrder.includes(n))];
   // open on the first generated page, so the user lands on what was just built
   fs.writeFileSync(pj, JSON.stringify({ $schema: r.schemas.pages, pageOrder: order, activePageName: order[0] }, null, 2));
+  fs.writeFileSync(manifest, JSON.stringify(r.pages.map(p => p.name), null, 2));
   console.log(r.pages.map(p => `${p.displayName}: ${p.visuals.length} visuals`).join('\n'));
   if (kept.length) console.log(`kept ${kept.length} existing page(s) untouched`);
+  if (!applyTheme && opts.theme !== false) console.log('report theme left as it was (the report has pages of its own); pass { theme: true } to apply the generated theme');
 }
 
 module.exports = { report, colors, C, M, inFilter, cmpFilter, between, topN, sortBy, measureColors, valueColors, frame, bare, lit, str, num, bool, hex, FONT, FONT_SB };

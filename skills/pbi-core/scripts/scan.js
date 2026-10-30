@@ -477,6 +477,8 @@ const utf16 = b => (b[0] === 0xff && b[1] === 0xfe ? b.slice(2) : b).toString('u
 
 function scanPbix(file) {
   const out = { kind: 'pbix', path: file, name: path.basename(file, '.pbix') };
+  // a .pbip saved next to it puts visual.json files <folder> + <name> + 87 characters deep: Windows stops at 260
+  out.pbipLongestPath = path.dirname(file).length + out.name.length + 87;
   try {
     const z = zipEntries(file);
     out.hasImportedModel = z.names.includes('DataModel');
@@ -513,7 +515,7 @@ function scanModelDir(dir) {
   let model;
   if (isDir(def)) model = modelFromTmdl(def);
   else if (exists(path.join(dir, 'model.bim'))) model = modelFromBim(path.join(dir, 'model.bim'));
-  else return { path: dir, error: 'no definition/ folder or model.bim' };
+  else return { path: dir, name: path.basename(dir).replace(/\.SemanticModel$/, ''), error: 'no definition/ folder or model.bim yet (Desktop may still be saving)' };
   buildDeps(model);
   model.path = dir;
   model.name = path.basename(dir).replace(/\.SemanticModel$/, '');
@@ -657,6 +659,7 @@ function summary(result, detail) {
   for (const x of result.pbix) {
     L.push(`PBIX ${x.path}${x.openInDesktop ? '  [OPEN IN DESKTOP]' : ''}${x.hasPbipCopy ? '  (a .pbip copy exists next to it)' : ''}`);
     if (x.error) L.push(`  ${x.error}`);
+    if (x.pbipLongestPath >= 250) L.push(`  WARNING a .pbip saved in this folder would have paths of ~${x.pbipLongestPath} characters (Windows limit 260): save the project to a shorter folder`);
     if (x.report) L.push(`  report  ${fmtReport(x.report)}`);
     L.push(`  model   ${x.modelNote || ''}`);
     if (detail && x.report) L.push(...reportLines(x.report));

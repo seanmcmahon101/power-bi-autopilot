@@ -41,7 +41,12 @@ r.write();
 | `note(pos, heading, lines)` | framed textbox | "How to read" panels |
 | `textbox(pos, paragraphs)` / `add(type, pos, visual, filters)` | anything | raw escape hatch |
 
-Page options: `r.page('Name', { filters: [...], hidden: true })`. Report options: `pbir.report(dir, { themeName, palette: [hex...], replaceAll, theme: false })`.
+Page options: `r.page('Name', { filters: [...], hidden: true })`. Report options: `pbir.report(dir, { themeName, palette: [hex...], replaceAll, theme })`.
+
+What `r.write()` touches:
+
+- **Pages:** it deletes and rewrites only its own pages: the ones in this build, plus the ones listed in `_viz/generated-pages.json` from the last build (so a page removed from the build disappears). Empty pages (Desktop's blank "Page 1") go too. Every other page stays exactly as it was. `replaceAll: true` drops all other pages; use it only on a report that is entirely generated.
+- **Theme:** the generated theme is applied only when the report has no pages of its own left, or its custom theme is already the generated one. A report with the user's own pages keeps its theme, images and background untouched; generated visuals set their own colours and fonts, so they look the same either way. `theme: true` forces the theme (it restyles the user's pages: ask first), `theme: false` never writes it.
 
 ## Filters
 

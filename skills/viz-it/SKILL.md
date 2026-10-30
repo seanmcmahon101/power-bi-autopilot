@@ -22,7 +22,7 @@ The pages are written as PBIR files, so the target must be a `.pbip` whose repor
 | Scan says | Do |
 |---|---|
 | `.pbip`, report `PBIR` | Nothing. |
-| `.pbix` | Convert: `references/drive-desktop.md` § Save as .pbip. The .pbix stays untouched as the old copy; from now on the .pbip is the file to open. Tell the user that in one sentence. |
+| `.pbix` | Convert: `references/drive-desktop.md` § Save as .pbip. The .pbix stays untouched as the old copy; from now on the .pbip is the file to open. Tell the user that in one sentence. If the scan warns about path length, save the project to a short folder instead of next to the .pbix. |
 | `.pbip`, report `PBIR-Legacy` | Upgrade: `references/drive-desktop.md` § Turn on PBIR. |
 | Model is `model.bim` | Fine for reading. To add measures with Desktop closed, prefer the MCP route or turn on TMDL (same section). |
 | No model, thin report | Visuals can still be built; measures must already exist in the published model. Check fields against the MCP (`ConnectFabric`) if available. |
@@ -61,7 +61,7 @@ Run `node <core>/scripts/scan.js <project> --detail` again: the new measures mus
 3. If Desktop has the project open: focus it and press Ctrl+S **before** running the build (otherwise Desktop's next save overwrites the new files).
 4. `node _viz/build.js` then `node <core>/scripts/check.js <project>.pbip --layout`. Fix every ERROR and every overlap WARN in `build.js`, rebuild, re-check until clean.
 
-The build only replaces pages it created (matched by name) and empty pages. The user's own pages stay as they are, after the generated ones.
+The build only replaces pages it created (this build's pages and those in `_viz/generated-pages.json`) and empty pages. The user's own pages stay as they are, after the generated ones, and so does the report's theme, background and images when such pages exist. After the build, prove it: their page files and `report.json` must be unchanged (compare checksums taken before the build).
 
 ## 7. Load in Desktop
 

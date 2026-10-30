@@ -32,9 +32,10 @@ function check(target, opts = {}) {
     const def = path.join(r.path, 'definition');
     if (r.format !== 'PBIR') { add('ERROR', r.path, `report is ${r.format}, not PBIR. Save it from Desktop with the PBIR preview feature on (see viz-it).`); continue; }
 
-    // every JSON parses
+    // every JSON parses; no path near the Windows 260-character limit (Desktop fails to save or open silently)
     const walk = d => { for (const e of fs.readdirSync(d, { withFileTypes: true })) {
       const f = path.join(d, e.name);
+      if (f.length >= 250) add('ERROR', f, `path is ${f.length} characters; Windows stops at 260. Move the project to a shorter folder.`);
       if (e.isDirectory()) walk(f);
       else if (e.name.endsWith('.json')) { try { JSON.parse(fs.readFileSync(f, 'utf8').replace(/^﻿/, '')); } catch (err) { add('ERROR', f, `invalid JSON: ${err.message}`); } }
     } };
