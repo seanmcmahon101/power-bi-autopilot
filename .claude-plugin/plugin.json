@@ -1,6 +1,6 @@
 {
   "name": "pbi",
-  "description": "Power BI skills for Claude Code that do the work for you: set up a folder, explain a dashboard, build report pages end to end in Power BI Desktop, audit every DAX measure, and install the Power BI Modeling MCP.",
+  "description": "Power BI skills for Claude Code that do the work for you: set up a folder, build the model from raw data, build report pages end to end in Power BI Desktop, explain a dashboard, audit every DAX measure, and install the Power BI Modeling MCP.",
   "author": {
     "name": "Sean McMahon",
     "url": "https://github.com/seanmcmahon101"

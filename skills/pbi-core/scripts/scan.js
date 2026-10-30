@@ -707,7 +707,7 @@ function detailLines(p) {
   return L;
 }
 
-module.exports = { scan, parseTmdl, scanModelDir, scanReportDir, collectFields, daxRefs, stripDax, splitName, summary, desktopWindows };
+module.exports = { scan, zipEntries, parseTmdl, scanModelDir, scanReportDir, collectFields, daxRefs, stripDax, splitName, summary, desktopWindows };
 
 if (require.main === module) {
   const args = process.argv.slice(2);

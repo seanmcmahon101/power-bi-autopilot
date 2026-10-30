@@ -1,6 +1,6 @@
 ---
 name: pbi-core
-description: Shared Power BI know-how and scripts behind /init-pbi, /data-who, /viz-it, /audit-measures and /mcp-it - file formats (.pbix, .pbip, PBIR, TMDL), the scan/check scripts, Desktop window control, and how to talk to Power BI beginners. Load it before reading or writing any Power BI project file.
+description: Shared Power BI know-how and scripts behind /init-pbi, /model-it, /data-who, /viz-it, /audit-measures and /mcp-it - file formats (.pbix, .pbip, PBIR, TMDL), the scan/check scripts, Desktop window control, and how to talk to Power BI beginners. Load it before reading or writing any Power BI project file.
 user-invocable: false
 ---
 

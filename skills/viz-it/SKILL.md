@@ -26,6 +26,8 @@ The pages are written as PBIR files, so the target must be a `.pbip` whose repor
 | `.pbip`, report `PBIR-Legacy` | Upgrade: `references/drive-desktop.md` § Turn on PBIR. |
 | Model is `model.bim` | Fine for reading. To add measures with Desktop closed, prefer the MCP route or turn on TMDL (same section). |
 | No model, thin report | Visuals can still be built; measures must already exist in the published model. Check fields against the MCP (`ConnectFabric`) if available. |
+| No Power BI file at all, only data (Excel, CSV, SQL) | Run `/model-it` first: it creates the project and the model, then comes back here. |
+| Model has no tables yet | Same: `/model-it`. |
 
 Back up first: copy the project (or .pbix) to `.pbi-backups/<yyyy-mm-dd-hhmm>/`.
 
@@ -49,6 +51,7 @@ Visuals should bind explicit measures, not raw columns summed by Desktop. For ea
 | Situation | How |
 |---|---|
 | Desktop has the file open and the MCP is available | `measure_operations` create on the open model, then focus Desktop and Ctrl+S so TMDL on disk matches. |
+| Model built by `/model-it` (a `_model/build.js` exists) | Add the measures to `_model/build.js` (the `dax` patterns cover totals, ratios, prior year, rolling, year to date), close Desktop, rebuild. |
 | Desktop closed, TMDL model | Append to the fact table's `.tmdl` file: see `references/visual-recipes.md` § Measures in TMDL. |
 | Published model / thin report | Don't. Use existing measures and tell the user which ones would help. |
 

@@ -1,0 +1,61 @@
+CustomerID,CustomerName,Region,Country,Segment
+C001,Kestrel Motion,Central,Poland,Service
+C002,Kestrel Hydraulics,South,Spain,Distributor
+C003,Tidal Fluid Power,North,Norway,OEM
+C004,Cedar Motion,North,Norway,Service
+C005,Falcon Equipment,Central,Germany,Service
+C006,Quarry Engineering,South,Italy,OEM
+C007,Falcon Systems,North,Norway,Distributor
+C008,Alder Systems,Central,Netherlands,OEM
+C009,River Equipment,South,Spain,Service
+C010,Summit Hydraulics,Central,Poland,Distributor
+C011,Juniper Engineering,North,United Kingdom,Service
+C012,Granite Systems,North,Norway,OEM
+C013,Maple Systems,South,Spain,Distributor
+C014,Summit Motion,North,United Kingdom,Service
+C015,Iris Engineering,North,United Kingdom,Distributor
+C016,Iris Industrial,Central,Netherlands,OEM
+C017,Alder Equipment,Central,Netherlands,Service
+C018,Nova Systems,North,Norway,OEM
+C019,Iris Hydraulics,Central,Germany,Distributor
+C020,Falcon Motion,Central,Poland,OEM
+C021,Tidal Systems,North,Ireland,Distributor
+C022,Quarry Fluid Power,North,Ireland,Service
+C023,River Machinery,Central,Germany,OEM
+C024,Summit Machinery,North,Norway,OEM
+C025,Birch Systems,North,Ireland,Service
+C026,Kestrel Industrial,North,Ireland,Distributor
+C027,Birch Machinery,North,Norway,OEM
+C028,Orbit Machinery,North,Norway,Service
+C029,Pine Fluid Power,North,United Kingdom,Service
+C030,Delta Engineering,South,Spain,Distributor
+C031,Ember Equipment,Central,Germany,Distributor
+C032,Granite Engineering,North,Norway,Distributor
+C033,Birch Fluid Power,South,Spain,Service
+C034,Harbor Systems,North,Ireland,Service
+C035,Nova Industrial,South,Spain,OEM
+C036,Summit Industrial,South,Spain,Distributor
+C037,Linden Systems,South,France,Service
+C038,River Engineering,South,Italy,OEM
+C039,Juniper Fluid Power,North,Ireland,Service
+C040,Nova Engineering,South,France,OEM
+C041,Delta Hydraulics,North,United Kingdom,Distributor
+C042,Birch Hydraulics,South,France,Distributor
+C043,Alder Hydraulics,North,Norway,Service
+C044,Harbor Fluid Power,Central,Netherlands,OEM
+C045,Alder Engineering,South,Spain,OEM
+C046,Delta Fluid Power,Central,Poland,OEM
+C047,Falcon Industrial,North,Norway,Distributor
+C048,River Industrial,Central,Poland,Distributor
+C049,Kestrel Fluid Power,South,Spain,OEM
+C050,Tidal Engineering,South,Spain,OEM
+C051,Granite Hydraulics,North,Ireland,Distributor
+C052,Linden Industrial,North,United Kingdom,OEM
+C053,Cedar Fluid Power,Central,Poland,Service
+C054,Orbit Fluid Power,North,Ireland,Distributor
+C055,Maple Motion,South,Spain,OEM
+C056,Summit Equipment,Central,Netherlands,Distributor
+C057,Birch Motion,Central,Germany,OEM
+C058,Ember Hydraulics,Central,Netherlands,OEM
+C059,Delta Motion,Central,Germany,Service
+C060,Falcon Engineering,Central,Germany,OEM

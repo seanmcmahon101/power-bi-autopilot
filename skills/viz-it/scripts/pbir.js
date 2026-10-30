@@ -124,6 +124,9 @@ const frame = (title, subtitle) => {
   if (subtitle) {
     o.subTitle = [{ properties: { show: bool(true), text: str(subtitle), fontColor: hex(MUTED), fontSize: num(9), fontFamily: str(FONT), alignment: str('left') } }];
     o.divider = [{ properties: { show: bool(false) } }];
+  } else if (title) {
+    // otherwise some charts show an automatic subtitle such as "Sales by Region and Segment"
+    o.subTitle = [{ properties: { show: bool(false) } }];
   }
   return o;
 };

@@ -70,7 +70,9 @@ For rolling periods ("last 12 weeks") don't hand-write relative-date JSON: add a
 
 - Stacked bar = `barChart`, stacked column = `columnChart`. `stackedBarChart` does not exist ("custom visual not found"). `check.js` catches it.
 - A `cardVisual` with several measures wraps unpredictably: one card per measure.
-- `cardVisual` applies automatic display units on top of the format string, with no per-card setting. Use plain formats (`£#,0.0`, shows £86.5M); a scaled format like `£#,0.0,,"M"` gets divided twice. If you do scale in DAX format strings, the commas go left of the decimal point: `£#,0,,.0"m"`.
+- `cardVisual` applies automatic display units on top of the format string, with no per-card setting (its Value options are font, colour, alignment, "show blank as"; no decimals or units), and rounds to the format's decimals: `£#,0` shows £1,623,838 as "£2M". Give money measures meant for cards one decimal (`£#,0.0` shows £1.6M). A scaled format like `£#,0.0,,"M"` gets divided twice. If you do scale in DAX format strings, the commas go left of the decimal point: `£#,0,,.0"m"`.
+- A chart given no subtitle can show an automatic one ("Sales by Region and Segment"); the library hides it.
+- Prior-year and year-on-year measures on a card or table with no date in context compare every date with every date shifted a year (often 0% or nonsense). Use rolling (last 12 vs previous 12) or year-to-date measures there; keep prior-year for charts with a date axis.
 - Slicer `strictSingleSelect: true` auto-selects "(Blank)" and can blank the page. The library uses `singleSelect` only.
 - TopN filters: the outer condition must use `"Table": {"SourceRef": {"Source": "subquery"}}`, not `TableRef`. The `topN` helper does.
 - Legend position `TopLeft` overlaps the plot area; the library uses `Top`.

@@ -88,6 +88,7 @@ Show the user a short list of the changes, with line counts before and after, an
 
 End with the one or two skills that fit what you found, e.g.:
 
+- only data files (Excel, CSV) or a database, no report yet: `/model-it`
 - a .pbix and the user wants new pages: `/viz-it`
 - an existing report nobody explained: `/data-who`
 - a model with many measures or broken references: `/audit-measures`

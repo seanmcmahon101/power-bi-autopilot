@@ -9,7 +9,7 @@
     {
       "name": "pbi",
       "source": "./",
-      "description": "Set up a Power BI folder, explain dashboards, build report pages end to end, audit DAX measures, install the Power BI Modeling MCP."
+      "description": "Set up a Power BI folder, build models from raw data, build report pages end to end, explain dashboards, audit DAX measures, install the Power BI Modeling MCP."
     }
   ]
 }
